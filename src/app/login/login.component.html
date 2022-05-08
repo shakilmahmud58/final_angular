@@ -1,0 +1,29 @@
+<div class="container" *ngIf="loginForm">
+    <div class="row">
+        <form class="col-5" ngNativeValidate (ngSubmit)="logIn()">
+            <label for="name" class="form-lebel">Email</label>
+            <input class="form-control" type="email" name="email" id="email" [(ngModel)]="email" required/>
+            <label for="home" class="form-lebel">Password</label>
+            <input class="form-control" type="password" name="pass" id="pass" [(ngModel)]="password" required/>
+            <button type="submit" class="btn btn-primary my-2">Login</button>
+            <button class="btn btn-secondary my-2 mx-2 cursor-pointer" (click)="switch()">Register Form</button>
+        </form>
+    </div>
+</div>
+
+<div class="container" *ngIf="!loginForm">
+    <div class="row">
+        <form class="col-5" ngNativeValidate (ngSubmit)="signUp()">
+            <label for="name" class="form-lebel">Name</label>
+            <input class="form-control" type="text" name="name" id="name" [(ngModel)]="name" required/>
+            <label for="roll" class="form-lebel">Email</label>
+            <input class="form-control" type="email" name="email" id="email" [(ngModel)]="email" required/>
+            <label for="home" class="form-lebel">Password</label>
+            <input class="form-control" type="password" name="pass" id="pass" [(ngModel)]="password" required/>
+            <button type="submit" class="btn btn-primary my-2">Sign Up</button>
+            <button class="btn btn-secondary my-2 mx-2 cursor-pointer" (click)="switch()">Already Registered</button>
+        </form>
+    </div>
+</div>
+
+

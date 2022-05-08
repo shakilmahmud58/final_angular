@@ -1,0 +1,17 @@
+<mat-select>
+
+</mat-select>
+<mat-grid-list cols="3" rowHeight="2:3">
+    <div *ngFor="let x of showItem, let num=index">
+        <mat-grid-tile>
+            <app-product [product]="x" class="p-2"></app-product>
+        </mat-grid-tile>
+    </div>
+
+</mat-grid-list>
+<mat-paginator [length]="length"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              (page)="onPageChange($event)"
+              aria-label="Select page">
+</mat-paginator>
