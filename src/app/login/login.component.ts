@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   email:string='';
   password:string='';
   loginForm:boolean=true;
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router) { console.log('login')}
 
   ngOnInit(): void {
   }
@@ -28,10 +28,19 @@ export class LoginComponent implements OnInit {
     this.loginService.logInUser(user).subscribe((res:any)=>{
       if(res.code==true)
       {
-        console.log(res);
-        this.loginService.setMsg(res);
-        localStorage.setItem('Auth-Token',res.token);
-        this.router.navigate(['products']);
+        if(res.role=='admin'){
+          this.loginService.admin.next(true);
+          // this.loginService.getToken(res.token);
+          localStorage.setItem('Auth-Token',res.token);
+          this.router.navigate(['products']);
+        }
+        else{
+          this.loginService.user.next(true);
+          // this.loginService.getToken(res.token);
+          localStorage.setItem('Auth-Token',res.token);
+          this.router.navigate(['my-cart']);
+        }
+
       }
       else
       {

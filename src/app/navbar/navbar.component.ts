@@ -8,18 +8,38 @@ import { LoginService } from '../services/login.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor(private router : Router, private loginservice: LoginService) { }
+  user:boolean=false;
+  admin:boolean=false;
+  constructor(private router : Router, private loginservice: LoginService) { 
+    this.loginservice.getadmin().subscribe((res:any)=>{
+      console.log(res)
+      this.admin=res;
+    })
+    this.loginservice.getuser().subscribe((res:any)=>{
+      console.log(res)
+      this.user=res;
+    })
+  }
   role:any;
   ngOnInit(): void {
-    this.loginservice.getMsg().subscribe((res:any)=>{
-      this.role=res.role;
-      console.log(this.role);
+    this.loginservice.authChecker().subscribe((res:any)=>{
+      if(res.role=='admin')
+        {this.admin=true; this.user=false}
+      else if(res.role=='user')
+        {this.user=true; this.admin=false}
+      else
+      {
+        this.admin=false;
+        this.user=false;
+      }
+
     })
-    console.log(this.role)
+
   }
   logOut(){
     localStorage.removeItem('Auth-Token');
+    this.loginservice.admin.next(false);
+    this.loginservice.user.next(false);
     this.router.navigate(['login']);
   }
 

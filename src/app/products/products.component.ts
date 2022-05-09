@@ -4,6 +4,7 @@ import { ProductsService } from '../services/products.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { LoginService } from '../services/login.service';
+import { CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY } from '@angular/cdk/overlay/overlay-directives';
 
 @Component({
   selector: 'app-products',
@@ -11,13 +12,22 @@ import { LoginService } from '../services/login.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-
-  constructor(private router:Router, private service:ProductsService, private dialog:MatDialog, private authservice: LoginService) { }
+  islogIn:boolean=false;
+  constructor(private router:Router, private service:ProductsService, private dialog:MatDialog, private authservice: LoginService) {
+    this.authservice.getadmin().subscribe((res:any)=>{
+      console.log(res)
+      this.islogIn=res;
+    })
+   }
   products:any;
   displayedColumns = ['name', 'code', 'category', 'price', 'date','_id'];
 
   ngOnInit(): void {
-    this.verifyToken();
+    this.authservice.authChecker().subscribe((res:any)=>{
+      if(res.role=='admin')
+      this.islogIn=true;
+    })
+    this.getProducts();
   }
   addProduct(){
     this.router.navigate(['products/create']);
@@ -25,21 +35,21 @@ export class ProductsComponent implements OnInit {
   }
   verifyToken(){
     this.authservice.authChecker().subscribe((res:any)=>{
-      if(res.status!=true)
+      if(res.role=='admin')
       {
-        //this.authservice.setMsg(res);
-        this.router.navigate(['login']);
+        this.authservice.admin.next(true)
+        this.router.navigate(['products'])
       }
       else
       {
-        //this.authservice.setMsg(res);
-        this.getProducts();
+        this.authservice.admin.next(false)
+        this.router.navigate(['login']);
       }
     })
   }
   getProducts(){
      this.service.getProductList().subscribe((res:any)=>{
-       console.log(res);
+       //console.log(res);
        this.products=res;
      })
   }
@@ -47,11 +57,18 @@ export class ProductsComponent implements OnInit {
     alert(id);
   }
   deleteItem(id:any){
-    //confirm("Are you sure to delete this product?")
     this.service.deleteProduct(id).subscribe((res:any)=>{
-      this.products=this.products.filter((x:any)=>{
-        return x._id !== id 
-      });
+      console.log(res);
+      if(res.status!=false){
+        this.products=this.products.filter((x:any)=>{
+          return x._id !== id 
+        });
+      }
+      else
+      {
+        alert("You have no access");
+      }
+
     })
   }
 

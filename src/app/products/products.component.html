@@ -1,6 +1,8 @@
-<button mat-raised-button color="primary" (click)="addProduct()" class="m-2">Add New Product</button>
 
-<table mat-table [dataSource]="products" class="mat-elevation-z8">
+<h1 *ngIf="!islogIn" class="text-center">You have no access to page</h1>
+<button mat-raised-button color="primary" (click)="addProduct()" class="m-2" *ngIf="islogIn">Add New Product</button>
+
+<table mat-table [dataSource]="products" class="mat-elevation-z8" *ngIf="islogIn">
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let product"> {{product.name}} </td>

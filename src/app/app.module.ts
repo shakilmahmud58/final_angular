@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { AdminguardGuard } from './guards/adminguard.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminInterceptor } from './interceptors/admin.interceptor';
+import { UserguardGuard } from './guards/userguard.guard';
 
 @NgModule({
   declarations: [
@@ -42,9 +43,9 @@ import { AdminInterceptor } from './interceptors/admin.interceptor';
     RouterModule.forRoot([
       {path:'dashboard', component: DashboardComponent},
       {path:'products', component: ProductsComponent, canActivate:[AdminguardGuard]},
-      {path:'my-cart', component: MycartComponent},
+      {path:'my-cart', component: MycartComponent, canActivate:[UserguardGuard]},
       {path:'login', component: LoginComponent},
-      {path:'products/create', component: AddproductComponent},
+      {path:'products/create', component: AddproductComponent, canActivate:[AdminguardGuard]},
       {path:"" , redirectTo:'dashboard', pathMatch:"full"}
     ])
   ],

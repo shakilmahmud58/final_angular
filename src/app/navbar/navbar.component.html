@@ -4,16 +4,16 @@
         <a routerLink="dashboard" routerLinkActive="" >Dashboard</a>
       </button>
     <span class="example-spacer"></span>
-    <button mat-button class="mx-2">
+    <button mat-button class="mx-2" *ngIf="admin">
         <a routerLink="products">Products</a>
     </button>
-    <button mat-button class="mx-2">
+    <button mat-button class="mx-2" *ngIf="user || admin">
         <a  routerLink="my-cart">My Cart</a>
       </button>
-      <button mat-button class="mx-2">
+      <button mat-button class="mx-2" *ngIf="!user && !admin">
         <a  routerLink="login">Login</a>
       </button>
-      <button mat-button class="mx-2" (click)="logOut()">
+      <button mat-button class="mx-2" (click)="logOut()" *ngIf="admin || user">
         Logout
       </button>
   </mat-toolbar>

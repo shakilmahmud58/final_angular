@@ -10,8 +10,13 @@ import { ProductsService } from '../services/products.service';
   styleUrls: ['./addproduct.component.css']
 })
 export class AddproductComponent implements OnInit {
-
-  constructor(private service:ProductsService, private router: Router, private authservice:LoginService) { }
+  islogIn:boolean=false;
+  constructor(private service:ProductsService, private router: Router, private authservice:LoginService) { 
+    this.authservice.getadmin().subscribe((res:any)=>{
+      console.log(res)
+      this.islogIn=res;
+    })
+  }
   formdata = new FormGroup({
     name : new FormControl(''),
     code : new FormControl(''),
@@ -22,18 +27,21 @@ export class AddproductComponent implements OnInit {
     date : new FormControl(''),
   })
   ngOnInit(): void {
-    this.verifyToken();
-  }
-
-  verifyToken(){
     this.authservice.authChecker().subscribe((res:any)=>{
-      if(res.role!="admin")
-      {
-
-        this.router.navigate(['login']);
-      }
+      if(res.role=='admin')
+      this.islogIn=true;
     })
   }
+
+  // verifyToken(){
+  //   this.authservice.authChecker().subscribe((res:any)=>{
+  //     if(res.role!="admin")
+  //     {
+
+  //       this.router.navigate(['login']);
+  //     }
+  //   })
+  // }
   addNewProduct(){
 
     //console.log((this.formdata.value));
