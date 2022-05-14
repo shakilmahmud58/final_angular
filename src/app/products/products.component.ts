@@ -31,7 +31,6 @@ export class ProductsComponent implements OnInit {
   }
   addProduct(){
     this.router.navigate(['products/create']);
-    //alert("clicked");
   }
   verifyToken(){
     this.authservice.authChecker().subscribe((res:any)=>{
@@ -49,7 +48,7 @@ export class ProductsComponent implements OnInit {
   }
   getProducts(){
      this.service.getProductList().subscribe((res:any)=>{
-       //console.log(res);
+       console.log(res);
        this.products=res;
      })
   }
@@ -72,16 +71,18 @@ export class ProductsComponent implements OnInit {
     })
   }
 
-  openDialog(id:any){
+  openDialog(product:any){
+    console.log(product)
     const dialogbox = this.dialog.open(DialogBoxComponent,{
-      width: "300px",
-      height:"140px",
+      width: "400px",
+      height:"160px",
+      data:"products list",
       disableClose:true
     })
     dialogbox.afterClosed().subscribe((result:any) => {
        if(result.delete==true)
        {
-          this.deleteItem(id);   
+          this.deleteItem(product._id);   
        }
     });
   }

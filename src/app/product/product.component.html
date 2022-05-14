@@ -1,19 +1,23 @@
-<mat-card class="my-card my-2 mx-5">
+<mat-card class="my-card mx-3 border border-black">
+  <mat-card-header> 
+    <mat-card-title>{{product.name}}</mat-card-title>
+    <mat-card-subtitle>{{product.code}}</mat-card-subtitle>
+  </mat-card-header>
+<mat-card-content>
 
-    <img mat-card-image src="https://i.ibb.co/ccNWJt1/mb10.jpg" alt="Shiba Inu">
-    <mat-card-header> 
-        <mat-card-title>{{product.id}}</mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-      </mat-card-header>
-    <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six native Dog breeds: Akita, Kishu, Hokkaido, Kai, Shikoku, and Shiba.
-          Shiba is a small, agile dog that copes very well with mountainous terrain, the Shiba Inu is originally
-          bred for hunting.
+    <img src="https://i.ibb.co/ccNWJt1/mb10.jpg" alt={{product.name}}>
+        <p class="mt-2">
+          {{product.description}}
         </p>
       </mat-card-content>
     <mat-card-actions>
-      <button mat-button>Like</button>  
-      <button mat-button>Share</button>
+      <button mat-button color="primary" (click)="addToCart(product)" *ngIf="!myCart">Add to Cart</button>
+      <button mat-button color="primary" (click)="deleteItem(product)" *ngIf="myCart">Delete From Cart</button>
+      <div class="inc-dec-btn border border-gray-600 rounded-md ml-2" *ngIf="!myCart">
+        <button class="py-1 bg-gray-400 px-3 font-weight-bold" (click)="decrement()">-</button>
+        <span class="py-1 px-2">{{amount}}</span>
+        <button class="py-1 bg-gray-400 px-3 font-weight-bold " (click)="increment()">+</button>
+      </div>  
+      
     </mat-card-actions>
   </mat-card>

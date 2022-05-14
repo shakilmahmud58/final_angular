@@ -30,13 +30,11 @@ export class LoginComponent implements OnInit {
       {
         if(res.role=='admin'){
           this.loginService.admin.next(true);
-          // this.loginService.getToken(res.token);
           localStorage.setItem('Auth-Token',res.token);
           this.router.navigate(['products']);
         }
         else{
           this.loginService.user.next(true);
-          // this.loginService.getToken(res.token);
           localStorage.setItem('Auth-Token',res.token);
           this.router.navigate(['my-cart']);
         }

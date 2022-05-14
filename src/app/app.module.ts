@@ -26,6 +26,7 @@ import { UserguardGuard } from './guards/userguard.guard';
     AppComponent,
     DashboardComponent,
     ProductsComponent,
+    MycartComponent,
     NavbarComponent,
     ProductComponent,
     AddproductComponent,

@@ -1,6 +1,8 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
 import { PageEvent } from '@angular/material/paginator';
+import { MycartService } from '../services/mycart.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +15,7 @@ export class DashboardComponent implements OnInit {
   length:number=0;
   pageSize:number=10;
   showItem:any;
-  constructor(private service:DashboardService) { }
+  constructor(private service:DashboardService,private mycart: MycartService, private router:Router) { }
   data:any;
   ngOnInit(): void {
     this.getdata();
@@ -24,6 +26,14 @@ export class DashboardComponent implements OnInit {
        this.showItem=res.slice(0,10);
        this.length = res.length;
      })
+  }
+  addToCart(product:any){
+    this.mycart.addtocart(product).subscribe((res:any)=>{
+      if(res.status==false)
+      {
+        this.router.navigate(['login']);
+      }
+    })
   }
   onPageChange(event: PageEvent){
     console.log(event);

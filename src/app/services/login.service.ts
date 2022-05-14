@@ -44,8 +44,8 @@ export class LoginService {
     const token = localStorage.getItem('Auth-Token');
     if(token){
       const payLoad =new Array(jwt_decode(`${token}`));
-      const admin=(payLoad[0].role);
-      if(admin)
+      const role=(payLoad[0].role);
+      if(role)
         return true;
       else
         return false;

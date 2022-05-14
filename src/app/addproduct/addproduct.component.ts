@@ -22,7 +22,7 @@ export class AddproductComponent implements OnInit {
     code : new FormControl(''),
     category : new FormControl(''),
     price : new FormControl(''),
-    desc : new FormControl(''),
+    description : new FormControl(''),
     url : new FormControl(''),
     date : new FormControl(''),
   })
@@ -33,15 +33,6 @@ export class AddproductComponent implements OnInit {
     })
   }
 
-  // verifyToken(){
-  //   this.authservice.authChecker().subscribe((res:any)=>{
-  //     if(res.role!="admin")
-  //     {
-
-  //       this.router.navigate(['login']);
-  //     }
-  //   })
-  // }
   addNewProduct(){
 
     //console.log((this.formdata.value));
@@ -52,7 +43,7 @@ export class AddproductComponent implements OnInit {
         code : '',
         category: '',
         price : '',
-        desc : '',
+        description : '',
         url : '',
         date:''
       })

@@ -1,14 +1,18 @@
-<mat-select>
+<mat-select class="my-3 mr-2">
 
 </mat-select>
-<mat-grid-list cols="3" rowHeight="2:3">
-    <div *ngFor="let x of showItem, let num=index">
-        <mat-grid-tile>
-            <app-product [product]="x" class="p-2"></app-product>
-        </mat-grid-tile>
+<div class="container-fluid">
+    <div class="row justify-content-center g-5">
+        <div class="col-10 col-md-5 col-lg-4" *ngFor="let x of showItem, let num=index">
+             <app-product [product]="x" (additem)="addToCart($event)"></app-product>
+        </div>
     </div>
 
-</mat-grid-list>
+</div>
+        <!-- <mat-grid-tile  class="bg-warning"> -->
+
+    
+
 <mat-paginator [length]="length"
               [pageSize]="pageSize"
               [pageSizeOptions]="[5, 10, 25, 100]"
