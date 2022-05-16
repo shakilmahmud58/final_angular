@@ -35,6 +35,7 @@ export class ProductComponent implements OnInit {
   }
   decrement()
   {
+    if(this.amount>1)
     this.amount-=1;
   }
   increment(){

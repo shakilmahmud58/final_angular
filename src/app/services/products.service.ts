@@ -16,4 +16,10 @@ export class ProductsService {
   deleteProduct(id:any){
     return this.http.post('http://localhost:5000/deleteProduct',{_id:id});
   }
+  editProduct(product:any){
+    return this.http.post('http://localhost:5000/editProduct',product);
+  }
+  sortProducts(data:any){
+    return this.http.post('http://localhost:5000/sortProducts',data);
+  }
 }

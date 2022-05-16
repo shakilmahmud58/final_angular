@@ -1,6 +1,6 @@
 <h1 *ngIf="!islogIn" class="text-center">You have no access to page</h1>
 <mat-card class="m-4 text-center" *ngIf="islogIn">
-        <form [formGroup]="formdata" ngNativeValidate (ngSubmit)="addNewProduct()">
+        <form [formGroup]="formdata" ngNativeValidate>
             <div>
                 <div><label for="name">Product Name </label></div>
                 <mat-form-field appearance="outline">
@@ -59,6 +59,7 @@
                     <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
             </div>
-            <button mat-button class="bg-primary"  type="submit">Add Product</button>
+            <button mat-button class="bg-primary"  type="submit" *ngIf="!editData" (click)="addNewProduct()">Add Product</button>
+            <button mat-button class="bg-primary"  type="submit" *ngIf="editData" (click)="updateProduct()">Update Product</button>
         </form> 
 </mat-card>

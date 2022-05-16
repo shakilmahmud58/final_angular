@@ -4,7 +4,7 @@ import { ProductsService } from '../services/products.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { LoginService } from '../services/login.service';
-import { CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY_PROVIDER_FACTORY } from '@angular/cdk/overlay/overlay-directives';
+
 
 @Component({
   selector: 'app-products',
@@ -19,6 +19,7 @@ export class ProductsComponent implements OnInit {
       this.islogIn=res;
     })
    }
+
   products:any;
   displayedColumns = ['name', 'code', 'category', 'price', 'date','_id'];
 
@@ -28,6 +29,7 @@ export class ProductsComponent implements OnInit {
       this.islogIn=true;
     })
     this.getProducts();
+
   }
   addProduct(){
     this.router.navigate(['products/create']);
@@ -46,15 +48,24 @@ export class ProductsComponent implements OnInit {
       }
     })
   }
+  sortChange(e:any){
+    const sortBy= e.active;
+    const orderBy = e.direction;
+    this.service.sortProducts({sort:sortBy,order:orderBy}).subscribe((res)=>{
+      this.products=res;
+    })
+  }
   getProducts(){
      this.service.getProductList().subscribe((res:any)=>{
        console.log(res);
        this.products=res;
      })
   }
-  editItem(id:any){
-    alert(id);
+  editItem(product:any){
+    
+    this.router.navigateByUrl('products/create',{state:{product:product}});
   }
+
   deleteItem(id:any){
     this.service.deleteProduct(id).subscribe((res:any)=>{
       console.log(res);

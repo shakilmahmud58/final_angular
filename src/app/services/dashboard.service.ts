@@ -10,4 +10,7 @@ export class DashboardService {
   getData(){
     return this.http.get('http://localhost:5000/getProducts');
   }
+  sortData(data:any){
+    return this.http.post('http://localhost:5000/sortProducts',data);
+  }
 }

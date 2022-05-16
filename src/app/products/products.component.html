@@ -2,31 +2,31 @@
 <h1 *ngIf="!islogIn" class="text-center">You have no access to page</h1>
 <button mat-raised-button color="primary" (click)="addProduct()" class="m-2" *ngIf="islogIn">Add New Product</button>
 
-<table mat-table [dataSource]="products" class="mat-elevation-z8" *ngIf="islogIn">
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
+<table mat-table [dataSource]="products" matSort class="mat-elevation-z8" *ngIf="islogIn" (matSortChange)="sortChange($event)">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
         <td mat-cell *matCellDef="let product"> {{product.name}} </td>
       </ng-container>
       <ng-container matColumnDef="code">
-        <th mat-header-cell *matHeaderCellDef> Code </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
         <td mat-cell *matCellDef="let product"> {{product.code}} </td>
       </ng-container>
       <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef> Category </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
         <td mat-cell *matCellDef="let product"> {{product.category}} </td>
       </ng-container>
       <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
         <td mat-cell *matCellDef="let product"> {{product.price}} </td>
       </ng-container>
       <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
         <td mat-cell *matCellDef="let product"> {{product.date}} </td>
       </ng-container>
       <ng-container matColumnDef="_id">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let product"> 
-            <button class="mx-1" mat-button color="primary" (click)="editItem(product._id)">Edit</button>
+            <button class="mx-1" mat-button color="primary" (click)="editItem(product)">Edit</button>
             <button mat-button color="warn" (click)="openDialog(product)" [disabled]="product.isBestAchived">Delete</button> 
         </td>
       </ng-container>

@@ -1,6 +1,20 @@
-<mat-select class="my-3 mr-2">
-
-</mat-select>
+<div class="mx-3 my-3">
+    <mat-label class="mx-2">Sort By</mat-label>
+    <mat-form-field appearance="outline"> 
+        <mat-select [(ngModel)]="sortBy" (ngModelChange)="changeSortBy($event)">
+          <mat-option value="name">Product's Name</mat-option>
+          <mat-option value="price">Price</mat-option>
+          <mat-option value="code">Short Code</mat-option>
+          <mat-option value="date">Uploading Time</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline"> 
+        <mat-select [(ngModel)]="orderBy" (ngModelChange)="changeOrderBy($event)">
+          <mat-option value="asc">Ascending</mat-option>
+          <mat-option value="desc">descending</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
 <div class="container-fluid">
     <div class="row justify-content-center g-5">
         <div class="col-10 col-md-5 col-lg-4" *ngFor="let x of showItem, let num=index">
