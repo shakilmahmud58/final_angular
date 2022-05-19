@@ -7,13 +7,14 @@ import { Injectable } from '@angular/core';
 export class MycartService {
 
   constructor(private http: HttpClient) { }
+  url:string='https://server-58.azurewebsites.net';
   addtocart(data:any){
-    return this.http.post('http://localhost:5000/addToCart',data);
+    return this.http.post(this.url+'/addToCart',data);
   }
   getcartproducts(){
-    return this.http.get('http://localhost:5000/getcartproducts');
+    return this.http.get(this.url+'/getcartproducts');
   }
   deletecartproducts(id:any,pid:any){
-    return this.http.post('http://localhost:5000/deletecartproducts',{_id:id,pid});
+    return this.http.post(this.url+'/deletecartproducts',{_id:id,pid});
   }
 }

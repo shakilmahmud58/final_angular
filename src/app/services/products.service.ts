@@ -7,19 +7,20 @@ import { HttpClient } from '@angular/common/http';
 export class ProductsService {
 
   constructor(private http:HttpClient) { }
+  url:string='https://server-58.azurewebsites.net';
   addNewProduct(data:any){
-    return this.http.post('http://localhost:5000/addProduct',data);
+    return this.http.post(this.url+'/addProduct',data);
   }
   getProductList(){
-    return this.http.get('http://localhost:5000/getProducts');
+    return this.http.get(this.url+'/getProducts');
   }
   deleteProduct(id:any){
-    return this.http.post('http://localhost:5000/deleteProduct',{_id:id});
+    return this.http.post(this.url+'/deleteProduct',{_id:id});
   }
   editProduct(product:any){
-    return this.http.post('http://localhost:5000/editProduct',product);
+    return this.http.post(this.url+'/editProduct',product);
   }
   sortProducts(data:any){
-    return this.http.post('http://localhost:5000/sortProducts',data);
+    return this.http.post(this.url+'/sortProducts',data);
   }
 }

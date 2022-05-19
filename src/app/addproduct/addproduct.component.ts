@@ -22,7 +22,7 @@ export class AddproductComponent implements OnInit {
   }
   stateData:any;
   editData:any;
-  socket=io('http://localhost:5000');
+  socket=io('https://server-58.azurewebsites.net');
   formdata = new FormGroup({
     name : new FormControl(''),
     code : new FormControl(''),

@@ -13,6 +13,7 @@ export class LoginService {
   constructor(private http: HttpClient, private router: Router) { }
   public admin = new Subject<boolean>()
   public user = new Subject<boolean>()
+  url:string='https://server-58.azurewebsites.net';
   getadmin(){
      return this.admin.asObservable();
   }
@@ -20,13 +21,13 @@ export class LoginService {
     return this.user.asObservable();
  }
   logInUser(data:any){
-    return this.http.post('http://localhost:5000/login',data);
+    return this.http.post(this.url+'/login',data);
   }
   registerUser(data:any){
-    return this.http.post('http://localhost:5000/addNewUser',data);
+    return this.http.post(this.url+'/addNewUser',data);
   }
   authChecker(){
-    return this.http.get('http://localhost:5000/tokenverify');
+    return this.http.get(this.url+'/tokenverify');
   }
   verifytoken(){
     const token = localStorage.getItem('Auth-Token');
