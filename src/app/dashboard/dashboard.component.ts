@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   orderBy = "asc";
   constructor(private service:DashboardService,private mycart: MycartService, private router:Router) { }
   data:any;
-  socket=io('http://localhost:5000');
+  socket=io('https://server-58.azurewebsites.net');
   ngOnInit(): void {
     this.getdata();
     this.editItemBack();

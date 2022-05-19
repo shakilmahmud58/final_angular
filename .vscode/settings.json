@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/40374a01-c8ce-47c4-bcc9-395767e32346/resourceGroups/newOne/providers/Microsoft.Web/sites/angular-58",
+    "appService.deploySubpath": "dist\\final_project"
+}
