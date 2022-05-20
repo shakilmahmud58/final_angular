@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginService } from '../services/login.service';
 import { MycartService } from '../services/mycart.service';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { io } from 'socket.io-client';
 
 
 @Component({
@@ -14,8 +15,15 @@ export class MycartComponent implements OnInit {
 
   constructor(private service: MycartService, private dialog: MatDialog) {}
   cartProducts:any;
+  socket=io('https://server-58.azurewebsites.net');
   ngOnInit(): void {
     this.getCartProducts();
+    this.editItemBack();
+  }
+  editItemBack(){
+    this.socket.on('editback',(result:any)=>{
+       this.getCartProducts();
+    });
   }
   getCartProducts(){
      this.service.getcartproducts().subscribe((res:any)=>{
@@ -33,6 +41,7 @@ export class MycartComponent implements OnInit {
         }
       })
   }
+
   deleteEvent(product:any){
     console.log(product)
     const dialogbox = this.dialog.open(DialogBoxComponent,{
