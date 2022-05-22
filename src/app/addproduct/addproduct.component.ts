@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 import { ProductsService } from '../services/products.service';
 import { io } from 'socket.io-client';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-addproduct',
@@ -12,7 +13,8 @@ import { io } from 'socket.io-client';
 })
 export class AddproductComponent implements OnInit {
   islogIn:boolean=false;
-  constructor(private service:ProductsService, private router: Router, private authservice:LoginService) { 
+  loadItem:boolean=true;
+  constructor(private service:ProductsService, private router: Router, private authservice:LoginService, private snackbar:MatSnackBar) { 
     this.authservice.getadmin().subscribe((res:any)=>{
       console.log(res)
       this.islogIn=res;
@@ -35,7 +37,10 @@ export class AddproductComponent implements OnInit {
   ngOnInit(): void {
     this.authservice.authChecker().subscribe((res:any)=>{
       if(res.role=='admin')
-      this.islogIn=true;
+      {
+        this.islogIn=true;
+        this.loadItem=false
+      }
       this.checkStateData()
       
     })
@@ -59,7 +64,9 @@ export class AddproductComponent implements OnInit {
 
     //console.log((this.formdata.value));
     this.service.addNewProduct(this.formdata.value).subscribe((res:any)=>{
-      console.log(res);
+      this.snackbar.open("Product added successfully",'',{
+        duration:1500
+      })
       this.formdata = new FormGroup({
         name : new FormControl(''),
         code : new FormControl(''),

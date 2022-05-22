@@ -10,10 +10,9 @@ export class AppComponent implements OnInit{
   title = 'final_project';
   
   constructor(){
-    console.log('app');
+
   }
   ngOnInit(): void {
-    console.log('app');
   }
 
 

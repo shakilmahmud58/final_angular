@@ -12,11 +12,11 @@ export class NavbarComponent implements OnInit {
   admin:boolean=false;
   constructor(private router : Router, private loginservice: LoginService) { 
     this.loginservice.getadmin().subscribe((res:any)=>{
-      console.log(res)
+      //console.log(res)
       this.admin=res;
     })
     this.loginservice.getuser().subscribe((res:any)=>{
-      console.log(res)
+      //console.log(res)
       this.user=res;
     })
   }

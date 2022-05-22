@@ -4,7 +4,7 @@ import { ProductsService } from '../services/products.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { LoginService } from '../services/login.service';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-products',
@@ -13,7 +13,7 @@ import { LoginService } from '../services/login.service';
 })
 export class ProductsComponent implements OnInit {
   islogIn:boolean=false;
-  constructor(private router:Router, private service:ProductsService, private dialog:MatDialog, private authservice: LoginService) {
+  constructor(private router:Router, private snackbar:MatSnackBar, private service:ProductsService, private dialog:MatDialog, private authservice: LoginService) {
     this.authservice.getadmin().subscribe((res:any)=>{
       console.log(res)
       this.islogIn=res;
@@ -21,14 +21,22 @@ export class ProductsComponent implements OnInit {
    }
 
   products:any;
+  loadItem:boolean=true;
   displayedColumns = ['name', 'code', 'category', 'price', 'date','_id'];
 
   ngOnInit(): void {
     this.authservice.authChecker().subscribe((res:any)=>{
       if(res.role=='admin')
-      this.islogIn=true;
+      {
+        this.getProducts();
+
+      }
+      else{
+        this.loadItem=false;
+        this.islogIn=false;
+      }
     })
-    this.getProducts();
+    
 
   }
   addProduct(){
@@ -57,7 +65,9 @@ export class ProductsComponent implements OnInit {
   }
   getProducts(){
      this.service.getProductList().subscribe((res:any)=>{
-       console.log(res);
+       //console.log(res);
+       this.loadItem=false;
+       this.islogIn=true
        this.products=res;
      })
   }
@@ -68,22 +78,23 @@ export class ProductsComponent implements OnInit {
 
   deleteItem(id:any){
     this.service.deleteProduct(id).subscribe((res:any)=>{
-      console.log(res);
+      //console.log(res);
       if(res.status!=false){
+        this.snackbar.open('Deleted Successfully','',{duration:1500})
         this.products=this.products.filter((x:any)=>{
           return x._id !== id 
         });
       }
       else
       {
-        alert("You have no access");
+        this.snackbar.open('You have no access','',{duration:1500})
       }
 
     })
   }
 
   openDialog(product:any){
-    console.log(product)
+    //console.log(product)
     const dialogbox = this.dialog.open(DialogBoxComponent,{
       width: "400px",
       height:"160px",

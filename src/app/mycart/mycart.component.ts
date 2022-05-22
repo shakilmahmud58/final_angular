@@ -4,7 +4,7 @@ import { LoginService } from '../services/login.service';
 import { MycartService } from '../services/mycart.service';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { io } from 'socket.io-client';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-mycart',
@@ -13,10 +13,19 @@ import { io } from 'socket.io-client';
 })
 export class MycartComponent implements OnInit {
 
-  constructor(private service: MycartService, private dialog: MatDialog) {}
+  constructor(private service: MycartService, private dialog: MatDialog, private authservice: LoginService, private snackbar:MatSnackBar) {}
   cartProducts:any;
+  islogIn:boolean=false;
+  loadItem:boolean=true;
   socket=io('https://server-58.azurewebsites.net');
   ngOnInit(): void {
+    this.authservice.authChecker().subscribe((res:any)=>{
+      if(res.role=='admin')
+      {
+        this.islogIn=true;
+        this.loadItem=false
+      }
+    })
     this.getCartProducts();
     this.editItemBack();
   }
@@ -28,13 +37,14 @@ export class MycartComponent implements OnInit {
   getCartProducts(){
      this.service.getcartproducts().subscribe((res:any)=>{
        this.cartProducts=res;
-       console.log(this.cartProducts);
+       //console.log(this.cartProducts);
      })
   }
   deleteItem(id:any,pid:any){
       this.service.deletecartproducts(id,pid).subscribe((res:any)=>{
         //console.log(res);
         if(res.status!=false){
+          this.snackbar.open('Deleted Successfully','',{duration:1500})
           this.cartProducts=this.cartProducts.filter((x:any)=>{
             return x._id !== id 
           });
@@ -43,7 +53,7 @@ export class MycartComponent implements OnInit {
   }
 
   deleteEvent(product:any){
-    console.log(product)
+    //console.log(product)
     const dialogbox = this.dialog.open(DialogBoxComponent,{
       width: "400px",
       height:"150px",

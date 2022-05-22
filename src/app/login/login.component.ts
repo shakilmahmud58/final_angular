@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   email:string='';
   password:string='';
   loginForm:boolean=true;
-  constructor(private loginService: LoginService, private router: Router) { console.log('login')}
+  constructor(private loginService: LoginService, private router: Router, private snackbar:MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
       password : this.password
     }
     this.loginService.logInUser(user).subscribe((res:any)=>{
+      this.password='';
       if(res.code==true)
       {
         if(res.role=='admin'){
@@ -42,7 +44,7 @@ export class LoginComponent implements OnInit {
       }
       else
       {
-        alert("wrong data");
+        this.snackbar.open('This credential is not valid','',{duration:1500})
       }
     })
 
@@ -61,7 +63,7 @@ export class LoginComponent implements OnInit {
       }
       else
       {
-        alert("This email is taken");
+        this.snackbar.open('This email is taken','',{duration:1500})
       }
     })
   }

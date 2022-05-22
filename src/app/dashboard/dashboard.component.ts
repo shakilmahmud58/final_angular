@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   orderBy = "asc";
   constructor(private service:DashboardService,private mycart: MycartService, private router:Router) { }
   data:any;
+  loadItem:boolean=true;
   socket=io('https://server-58.azurewebsites.net');
   ngOnInit(): void {
     this.getdata();
@@ -28,6 +29,7 @@ export class DashboardComponent implements OnInit {
   }
   getdata(){
      this.service.getData().subscribe((res:any)=>{
+       this.loadItem=false;
        this.data=res;
        this.showItem=res.slice(0,10);
        this.length = res.length;

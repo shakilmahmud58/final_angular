@@ -1,5 +1,10 @@
-
-<h1 *ngIf="!islogIn" class="text-center">You have no access to page</h1>
+<div *ngIf="loadItem" class="d-flex justify-content-center my-4">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <h1 class="mx-2">Loading...</h1>
+</div>
+<h1 *ngIf="!islogIn && !loadItem" class="text-center">You have no access to this page</h1>
 <button mat-raised-button color="primary" (click)="addProduct()" class="m-2" *ngIf="islogIn">Add New Product</button>
 
 <table mat-table [dataSource]="products" matSort class="mat-elevation-z8" *ngIf="islogIn" (matSortChange)="sortChange($event)">
