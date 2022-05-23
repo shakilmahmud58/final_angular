@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MycartService } from '../services/mycart.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product',
@@ -9,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private mycart: MycartService, private snackbar:MatSnackBar ) { }
+  constructor(private mycart: MycartService) { }
   amount:number=1;
   myCart:boolean=false;
   @Input() product:any;
@@ -29,9 +28,7 @@ export class ProductComponent implements OnInit {
          description:product.description,
          url:product.url,
        }
-       this.snackbar.open("Product added to cart succesfully","",{
-         duration:1500
-       })
+
       this.additem.emit(data);
   }
   decrement()

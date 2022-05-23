@@ -5,6 +5,7 @@ import { MycartService } from '../services/mycart.service';
 import { Router } from '@angular/router';
 import { io } from 'socket.io-client';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class DashboardComponent implements OnInit {
   showItem:any;
   sortBy = "price";
   orderBy = "asc";
-  constructor(private service:DashboardService,private mycart: MycartService, private router:Router) { }
+  constructor(private service:DashboardService,private mycart: MycartService, private router:Router, private snackbar: MatSnackBar) { }
   data:any;
   loadItem:boolean=true;
   socket=io('https://server-58.azurewebsites.net');
@@ -40,6 +41,11 @@ export class DashboardComponent implements OnInit {
       if(res.status==false)
       {
         this.router.navigate(['login']);
+      }
+      else{
+        this.snackbar.open("Product added to cart succesfully","",{
+          duration:1500
+        })
       }
     })
   }
