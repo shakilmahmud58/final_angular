@@ -20,7 +20,7 @@ export class MycartComponent implements OnInit {
   socket=io('https://server-58.azurewebsites.net');
   ngOnInit(): void {
     this.authservice.authChecker().subscribe((res:any)=>{
-      if(res.role=='user')
+      if(res.role=="admin" || res.role=="user")
       {
         this.islogIn=true;
         this.loadItem=false
