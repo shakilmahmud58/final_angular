@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
     })
   }
   onPageChange(event: PageEvent){
-    console.log(event);
+    //console.log(event);
     var startIndex = event.pageIndex * event.pageSize;
     var endIndex = startIndex + event.pageSize;
     if(endIndex > event.length)

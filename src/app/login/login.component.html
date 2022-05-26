@@ -1,6 +1,7 @@
+<mat-card class="mt-4 w-auto">
 <div class="container" *ngIf="loginForm">
-    <div class="row">
-        <form class="col-5" ngNativeValidate (ngSubmit)="logIn()">
+    <div class="row justify-content-center align-items-center">
+        <form class="col-7 col-md-5" ngNativeValidate (ngSubmit)="logIn()">
             <label for="name" class="form-lebel">Email</label>
             <input class="form-control" type="email" name="email" id="email" [(ngModel)]="email" required/>
             <label for="home" class="form-lebel">Password</label>
@@ -12,8 +13,8 @@
 </div>
 
 <div class="container" *ngIf="!loginForm">
-    <div class="row">
-        <form class="col-5" ngNativeValidate (ngSubmit)="signUp()">
+    <div class="row justify-content-center align-items-center">
+        <form class="col-7 col-md-5" ngNativeValidate (ngSubmit)="signUp()">
             <label for="name" class="form-lebel">Name</label>
             <input class="form-control" type="text" name="name" id="name" [(ngModel)]="name" required/>
             <label for="roll" class="form-lebel">Email</label>
@@ -25,5 +26,5 @@
         </form>
     </div>
 </div>
-
+</mat-card>
 

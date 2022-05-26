@@ -1,3 +1,19 @@
 table{
     width: 100%;
 }
+.spinner{
+    height: 88%;
+}
+
+.mat-row:hover{
+    background-color: rgb(227, 227, 233);
+ 
+}
+.editbtn:hover{
+     background-color: rgb(103, 103, 248);
+     color: black;
+}
+.deletebtn:hover{
+    background-color: rgb(252, 70, 79);
+    color: white;
+}

@@ -1,21 +1,37 @@
-<mat-toolbar color="primary">
-    <span>My App</span>
-    <button mat-button class="mx-2">
-        <a routerLink="dashboard" routerLinkActive="" >Dashboard</a>
-      </button>
-    <span class="example-spacer"></span>
-    <button mat-button class="mx-2" *ngIf="admin">
-        <a routerLink="products">Products</a>
-    </button>
-    <button mat-button class="mx-2" *ngIf="user || admin">
-        <a  routerLink="my-cart">My Cart</a>
-      </button>
-      <button mat-button class="mx-2" *ngIf="!user && !admin">
-        <a  routerLink="login">Login</a>
-      </button>
-      <button mat-button class="mx-2" (click)="logOut()" *ngIf="admin || user">
-        Logout
-      </button>
-  </mat-toolbar>
+ <div class="container-fluid toolbar py-2">
+  <div class="row justify-content-between">
+     <div class="col-12 col-md-10 container-fluid text-center">
+       <div class="row align-items-center">
+        <div class="mx-4 text-lg col-10 col-md-2">My App</div>
+        <div class="mx-4 text-sm mt-1 rounded-md navLink col-10 col-sm-3 col-md-2">
+            <a class="py-2 rounded-md" routerLink="dashboard" routerLinkActive="active">Dashboard</a>
+        </div>
+        <div class="mx-4 text-sm mt-1 rounded-md navLink col-10 col-sm-3 col-md-2" *ngIf="admin">
+            <a class="py-2 rounded-md" routerLink="products" routerLinkActive="active">Products</a>
+        </div>
+        <div class="mx-4 text-sm mt-1 rounded-md navLink col-10 col-sm-3 col-md-2" *ngIf="user || admin">
+            <a  class="py-2 rounded-md" routerLink="my-cart" routerLinkActive="active">My Cart</a>
+        </div>
+        <div class="mx-4 text-sm mt-1 rounded-md navLink col-10 col-sm-3 col-md-2" *ngIf="!user && !admin">
+          <a  class="py-2 rounded-md" routerLink="login" routerLinkActive="active">Login</a>
+        </div>
+       </div>
+     </div>
+    
+    <div class="logoutbtn col-10 col-md-2 text-center">
+        <button mat-button class="mx-4 mt-1 rounded-md py-1" (click)="logOut()" *ngIf="admin || user">
+           Logout
+        </button>
+    </div>
+  </div>
+</div>  
 
 
+<!-- <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">ok</div>
+    <div class="col-md-4">logout</div>
+  </div>
+
+        
+</div> -->

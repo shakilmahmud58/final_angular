@@ -1,6 +1,6 @@
-<div class="mx-3 my-3">
+<div class="m-2">
     <mat-label class="mx-2">Sort By</mat-label>
-    <mat-form-field appearance="outline"> 
+    <mat-form-field appearance="outline" class="mr-1"> 
         <mat-select [(ngModel)]="sortBy" (ngModelChange)="changeSortBy($event)">
           <mat-option value="name">Product's Name</mat-option>
           <mat-option value="price">Price</mat-option>
@@ -8,7 +8,7 @@
           <mat-option value="date">Uploading Time</mat-option>
         </mat-select>
     </mat-form-field>
-    <mat-form-field appearance="outline"> 
+    <mat-form-field appearance="outline" class="mx-1"> 
         <mat-select [(ngModel)]="orderBy" (ngModelChange)="changeOrderBy($event)">
           <mat-option value="asc">Ascending</mat-option>
           <mat-option value="desc">descending</mat-option>
@@ -21,21 +21,21 @@
     </div>
     <h1 class="mx-2">Loading...</h1>
 </div>
-<div class="container-fluid" *ngIf="!loadItem">
+<div class="container" *ngIf="!loadItem">
     <div class="row justify-content-center g-5">
         <div class="col-10 col-md-5 col-lg-4" *ngFor="let x of showItem, let num=index">
              <app-product [product]="x" (additem)="addToCart($event)"></app-product>
         </div>
     </div>
-
 </div>
         <!-- <mat-grid-tile  class="bg-warning"> -->
 
     
-
 <mat-paginator [length]="length"
               [pageSize]="pageSize"
               [pageSizeOptions]="[5, 10, 25, 100]"
               (page)="onPageChange($event)"
-              aria-label="Select page">
+              aria-label="Select page"
+              class="sticky bottom-0 mt-5">
 </mat-paginator>
+

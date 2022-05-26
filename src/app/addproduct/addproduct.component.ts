@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from "@angular/forms"
+import { FormControl, FormGroup, Validators } from "@angular/forms"
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 import { ProductsService } from '../services/products.service';
@@ -26,7 +26,7 @@ export class AddproductComponent implements OnInit {
   editData:any;
   socket=io('https://server-58.azurewebsites.net');
   formdata = new FormGroup({
-    name : new FormControl(''),
+    name : new FormControl('',[Validators.required]),
     code : new FormControl(''),
     category : new FormControl(''),
     price : new FormControl(''),
@@ -64,9 +64,16 @@ export class AddproductComponent implements OnInit {
 
     //console.log((this.formdata.value));
     this.service.addNewProduct(this.formdata.value).subscribe((res:any)=>{
-      this.snackbar.open("Product added successfully",'',{
-        duration:1500
-      })
+      if(!res.msg){
+           this.snackbar.open("Product added successfully",'',{
+           duration:1500
+          })
+        }
+        else{
+          this.snackbar.open("Failed to add. Same name and code is used for another product",'',{
+            duration:2000
+           })
+        }
       this.formdata = new FormGroup({
         name : new FormControl(''),
         code : new FormControl(''),
@@ -79,7 +86,9 @@ export class AddproductComponent implements OnInit {
     })
 
   }
-
+  getError(){
+    return "This field is required.";
+  }
   updateProduct(){
     const id = this.editData._id;
     this.service.editProduct({id:id, data:this.formdata.value}).subscribe((res:any)=>{

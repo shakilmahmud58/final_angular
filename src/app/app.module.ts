@@ -20,6 +20,7 @@ import { AdminguardGuard } from './guards/adminguard.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminInterceptor } from './interceptors/admin.interceptor';
 import { UserguardGuard } from './guards/userguard.guard';
+import { ShowimageComponent } from './showimage/showimage.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UserguardGuard } from './guards/userguard.guard';
     ProductComponent,
     AddproductComponent,
     DialogBoxComponent,
-    LoginComponent
+    LoginComponent,
+    ShowimageComponent
   ],
   imports: [
     BrowserModule,

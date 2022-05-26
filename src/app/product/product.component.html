@@ -1,12 +1,12 @@
-<mat-card class="my-card mx-3 border border-black">
-  <mat-card-header> 
+<mat-card class="my-card mx-2 border border-black">
+  <mat-card-header class=""> 
     <mat-card-title>{{product.name}}</mat-card-title>
     <mat-card-subtitle>{{product.code}}</mat-card-subtitle>
   </mat-card-header>
-<mat-card-content>
+  <mat-card-content class="">
 
-    <img *ngIf="product.url" src={{product.url}} alt={{product.name}}>
-    <img *ngIf="!product.url" src="https://i.ibb.co/tpWnLVt/noimage.png" alt={{product.name}}>
+        <img *ngIf="product.url" src={{product.url}} alt={{product.name}} class="rounded-md cursor-pointer" (click)="showImage(product.url)">
+        <img *ngIf="!product.url" src="https://i.ibb.co/tpWnLVt/noimage.png" alt={{product.name}} class="image rounded-md">
     
         <p class="mt-2">
           {{product.description}}
@@ -14,15 +14,14 @@
         <p class="mt-2">
           BDT {{product.price}}
         </p>
-      </mat-card-content>
-    <mat-card-actions>
-      <button mat-stroked-button color="primary" (click)="addToCart(product)" *ngIf="!myCart">Add to Cart</button>
-      <button mat-button color="primary" (click)="deleteItem(product)" *ngIf="myCart">Delete From Cart</button>
-      <div class="inc-dec-btn border border-gray-600 rounded-md ml-2" *ngIf="!myCart">
-        <button class="py-1 bg-gray-400 px-3 font-weight-bold" (click)="decrement()">-</button>
-        <span class="py-1 px-2">{{amount}}</span>
-        <button class="py-1 bg-gray-400 px-3 font-weight-bold " (click)="increment()">+</button>
-      </div>  
-      
+    </mat-card-content>
+    <mat-card-actions class="p-2">
+        <button mat-stroked-button color="primary" (click)="addToCart(product)" *ngIf="!myCart">Add to Cart</button>
+        <button mat-stroked-button color="warn" (click)="deleteItem(product)" *ngIf="myCart">Delete From Cart</button>
+        <div class="inc-dec-btn border border-gray-600 rounded-md ml-1 my-2" *ngIf="!myCart">
+          <button class="h-full py-1 bg-gray-400 px-3 font-weight-bold" (click)="decrement()">-</button>
+          <span class="py-1 px-2"><input type="number" [(ngModel)]="amount"/></span>
+          <button class="py-1 h-full bg-gray-400 px-3 font-weight-bold " (click)="increment()">+</button>
+        </div>
     </mat-card-actions>
   </mat-card>

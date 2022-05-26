@@ -1,69 +1,79 @@
-<div *ngIf="loadItem" class="d-flex justify-content-center my-4">
+<div *ngIf="loadItem" class="d-flex align-items-center justify-content-center spinner">
     <div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
-    <h1 class="mx-2">Loading...</h1>
+    <h1 class="mx-2 my-2">Loading...</h1>
 </div>
 <h1 *ngIf="!islogIn && !loadItem" class="text-center">You have no access to page</h1>
-<mat-card class="m-4 text-center" *ngIf="islogIn">
-        <form [formGroup]="formdata" ngNativeValidate>
-            <div>
-                <div><label for="name">Product Name </label></div>
-                <mat-form-field appearance="outline">
-                    <mat-label>Product Name</mat-label>
-                    <input type="text" matInput id="name" maxlength="50" minlength="3" formControlName="name" required>
-                </mat-form-field>
-            </div>
-
-            <div>
-                <div><label for="code">Product Short Code</label></div>
-                <mat-form-field appearance="outline">
-                    <mat-label>code</mat-label>
-                    <input type="text" id="code" matInput size="25" maxlength="50" minlength="3" formControlName="code" required>
-                </mat-form-field> 
-            </div>
-            <div>
-                <mat-form-field appearance="fill">
-                    <mat-label>Select</mat-label>
-                    <mat-select formControlName="category" required>
-                      <mat-option value="Computer & Accessories">Computer Accessories</mat-option>
-                      <mat-option value="Men's Fashion">Men's Fashion</mat-option>
-                      <mat-option value="Women's Fashion">Women's Fashion</mat-option>
-                      <mat-option value="Health and Household">Health and Household</mat-option>
-                      <mat-option value="Industrial and Scientific">Industrial and Scientific</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-             <div>
-                <div><label for="price">Price</label></div>
-                <mat-form-field appearance="outline">
-                    <mat-label>price</mat-label>
-                    <input type="number" id="price" matInput maxlength="50" minlength="3" formControlName="price" required>
-                </mat-form-field>
-             </div>
-             <div>
-                <div><label for="desc">Description</label></div>
-                <mat-form-field appearance="outline">
-                    <mat-label>description</mat-label>
-                    <input type="text" id="description" matInput size="25" maxlength="250" minlength="3" formControlName="description">
-                </mat-form-field> 
-            </div>
-            <div>
-                <div><label for="image">ImageUrl</label></div>
-                <mat-form-field appearance="outline">
-                    <mat-label>image url</mat-label>
-                    <input type="text" matInput id="image" formControlName="url">
-                </mat-form-field> 
-            </div>
-            <div>
-                <div><label for="date">Created Date</label></div>
-                <mat-form-field appearance="fill">
-                    <mat-label>Choose a date</mat-label>
-                    <input matInput [matDatepicker]="picker" id="date" formControlName="date" required>
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                  </mat-form-field>
+<mat-card class="p-4 m-4 text-center" *ngIf="islogIn">
+        <form [formGroup]="formdata" ngNativeValidate >
+            <div class="container mb-4">
+                <div class="row justify-content-center">
+                    <div class="col-10 col-md-5 mb-2">
+                        <!-- <div><label for="name">Product Name </label></div> -->
+                        <mat-form-field appearance="fill">
+                            <mat-label>Product Name</mat-label>
+                            <input type="text" matInput id="name" maxlength="50" minlength="3" formControlName="name" required>
+                            <mat-error *ngIf="formdata.invalid">{{getError()}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-10 col-md-5 mb-2">
+                        <!-- <div><label for="code">Product Short Code</label></div> -->
+                        <mat-form-field appearance="fill">
+                            <mat-label>code</mat-label>
+                            <input type="text" id="code" matInput size="25" maxlength="50" minlength="3" formControlName="code" required>
+                            <mat-error *ngIf="formdata.invalid">{{getError()}}</mat-error>
+                        </mat-form-field> 
+                    </div>
+                    <div class="col-10 col-md-5 mb-2">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Select</mat-label>
+                            <mat-select formControlName="category" required>
+                              <mat-option value="Computer & Accessories">Computer Accessories</mat-option>
+                              <mat-option value="Men's Fashion">Men's Fashion</mat-option>
+                              <mat-option value="Women's Fashion">Women's Fashion</mat-option>
+                              <mat-option value="Health and Household">Health and Household</mat-option>
+                              <mat-option value="Industrial and Scientific">Industrial and Scientific</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formdata.invalid">{{getError()}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-10 col-md-5 mb-2">
+                        <!-- <div><label for="price">Price</label></div> -->
+                        <mat-form-field appearance="fill">
+                            <mat-label>price</mat-label>
+                            <input type="number" id="price" matInput maxlength="50" minlength="3" formControlName="price" required>
+                            <mat-error *ngIf="formdata.invalid">{{getError()}}</mat-error>
+                        </mat-form-field>
+                     </div>
+                     <div class="col-10 col-md-5 mb-2">
+                        <!-- <div><label for="desc">Description</label></div> -->
+                        <mat-form-field appearance="fill">
+                            <mat-label>description</mat-label>
+                            <textarea type="text" id="description" matInput size="25" maxlength="250" minlength="3" formControlName="description"></textarea>
+                            <mat-error *ngIf="formdata.invalid">{{getError()}}</mat-error>
+                        </mat-form-field> 
+                    </div>
+                    <div class="col-10 col-md-5 mb-2">
+                        <!-- <div><label for="image">ImageUrl</label></div> -->
+                        <mat-form-field appearance="fill">
+                            <mat-label>image url</mat-label>
+                            <input type="text" matInput id="image" formControlName="url">
+                            <mat-error *ngIf="formdata.invalid">{{getError()}}</mat-error>
+                        </mat-form-field> 
+                    </div>
+                    <div class="col-10 col-md-5 mb-2">
+                        <!-- <div><label for="date">Created Date</label></div> -->
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker" id="date" formControlName="date" required>
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="formdata.invalid">{{getError()}}</mat-error>  
+                        </mat-form-field>
+                    </div>
+                </div>
             </div>
             <button mat-button class="bg-primary"  type="submit" *ngIf="!editData" (click)="addNewProduct()">Add Product</button>
             <button mat-button class="bg-primary"  type="submit" *ngIf="editData" (click)="updateProduct()">Update Product</button>

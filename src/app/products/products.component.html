@@ -1,13 +1,13 @@
-<div *ngIf="loadItem" class="d-flex justify-content-center my-4">
+<div *ngIf="loadItem" class="d-flex align-items-center justify-content-center spinner">
   <div class="spinner-border" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
-  <h1 class="mx-2">Loading...</h1>
+  <h1 class="mx-2 my-2">Loading...</h1>
 </div>
 <h1 *ngIf="!islogIn && !loadItem" class="text-center">You have no access to this page</h1>
 <button mat-raised-button color="primary" (click)="addProduct()" class="m-2" *ngIf="islogIn">Add New Product</button>
 
-<table mat-table [dataSource]="products" matSort class="mat-elevation-z8" *ngIf="islogIn" (matSortChange)="sortChange($event)">
+<table mat-table [dataSource]="showProducts" matSort class="mat-elevation-z8" *ngIf="islogIn" (matSortChange)="sortChange($event)">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
         <td mat-cell *matCellDef="let product"> {{product.name}} </td>
@@ -26,16 +26,24 @@
       </ng-container>
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-        <td mat-cell *matCellDef="let product"> {{product.date}} </td>
+        <td mat-cell *matCellDef="let product"> {{ product.date | date:'mediumDate' }}
+        </td>
       </ng-container>
       <ng-container matColumnDef="_id">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let product"> 
-            <button class="mx-1" mat-button color="primary" (click)="editItem(product)">Edit</button>
-            <button mat-button color="warn" (click)="openDialog(product)" [disabled]="product.isBestAchived">Delete</button> 
+            <button class="mx-1" mat-button color="primary" class="editbtn" (click)="editItem(product)">Edit</button>
+            <button mat-button class="deletebtn" color="warn" (click)="openDialog(product)" [disabled]="product.isBestAchived">Delete</button> 
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     
 </table>
+<mat-paginator class="sticky bottom-0 mt-4" [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons 
+    [length]="length"
+    [pageSize]="pageSize"
+    (page)="onpageChange($event)"
+    aria-label="Select page of periodic elements">
+</mat-paginator>

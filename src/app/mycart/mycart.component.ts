@@ -5,6 +5,7 @@ import { MycartService } from '../services/mycart.service';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { io } from 'socket.io-client';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mycart',
@@ -13,10 +14,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class MycartComponent implements OnInit {
 
-  constructor(private service: MycartService, private dialog: MatDialog, private authservice: LoginService, private snackbar:MatSnackBar) {}
+  constructor(private router:Router, private service: MycartService, private dialog: MatDialog, private authservice: LoginService, private snackbar:MatSnackBar) {}
   cartProducts:any;
   islogIn:boolean=false;
   loadItem:boolean=true;
+  productNumber:boolean=false;
   socket=io('https://server-58.azurewebsites.net');
   ngOnInit(): void {
     this.authservice.authChecker().subscribe((res:any)=>{
@@ -34,10 +36,18 @@ export class MycartComponent implements OnInit {
        this.getCartProducts();
     });
   }
+  gotodashboard(){
+    this.router.navigate(['dashboard']);
+  }
   getCartProducts(){
      this.service.getcartproducts().subscribe((res:any)=>{
-       this.cartProducts=res;
-       //console.log(this.cartProducts);
+       if(res.length==0)
+       {
+          this.productNumber=true;
+       }
+       else{
+        this.cartProducts=res;
+       }
      })
   }
   deleteItem(id:any,pid:any){

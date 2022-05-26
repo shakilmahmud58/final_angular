@@ -2,3 +2,21 @@
     width: fit-content;
     display: inline-block;
 }
+
+.image{
+    width:100%;
+    object-fit: fill;
+}
+input{
+    width:30px;
+    text-align: center;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

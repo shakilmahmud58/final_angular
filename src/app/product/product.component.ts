@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MycartService } from '../services/mycart.service';
+import { ShowimageComponent } from '../showimage/showimage.component'; 
 
 @Component({
   selector: 'app-product',
@@ -8,7 +10,7 @@ import { MycartService } from '../services/mycart.service';
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private mycart: MycartService) { }
+  constructor(private mycart: MycartService, private dialog:MatDialog) { }
   amount:number=1;
   myCart:boolean=false;
   @Input() product:any;
@@ -50,7 +52,15 @@ export class ProductComponent implements OnInit {
       this.myCart=false
     }
   }
-
+  showImage(url:any){
+    const dialogbox = this.dialog.open(ShowimageComponent,{
+      width: "700px",
+      height:"600px",
+      data:url,
+      disableClose:true
+    })
+    dialogbox.afterClosed()
+  }
   deleteItem(product:any){
     this.deleteitem.emit(product);
     }
