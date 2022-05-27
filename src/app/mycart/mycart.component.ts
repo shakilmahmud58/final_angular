@@ -58,6 +58,10 @@ export class MycartComponent implements OnInit {
           this.cartProducts=this.cartProducts.filter((x:any)=>{
             return x._id !== id 
           });
+          if(this.cartProducts.length==0)
+          {
+            this.productNumber=true;
+          }
         }
       })
   }

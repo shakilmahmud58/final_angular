@@ -107,6 +107,10 @@ export class ProductsComponent implements OnInit{
         this.products=this.products.filter((x:any)=>{
           return x._id !== id 
         });
+        if(this.products.length==0)
+        {
+          this.productNumber=true;
+        }
       }
       else
       {
