@@ -40,6 +40,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     
 </table>
+<div *ngIf="productNumber" class="d-flex justify-content-center align-items-center"> No products available.</div>
 <mat-paginator class="sticky bottom-0 mt-4" [pageSizeOptions]="[5, 10, 20]"
     showFirstLastButtons 
     [length]="length"

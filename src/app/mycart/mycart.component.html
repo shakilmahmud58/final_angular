@@ -7,7 +7,7 @@
 <h1 *ngIf="!islogIn && !loadItem" class="text-center">You have no access to page</h1>
 <div class="container-fluid mt-5" *ngIf="islogIn">
     <div class="row justify-content-center g-5">
-        <div *ngIf="productNumber">No products available. Please add a  product from <button mat-button (click)="gotodashboard()">Dashboard</button></div>
+        <div *ngIf="productNumber" class="d-flex justify-content-center align-items-center">No cart products available. Please add products from <button mat-button (click)="gotodashboard()">Dashboard</button></div>
         <div class="col-10 col-md-5 col-lg-4" *ngFor="let product of cartProducts, index as num">
             <app-product [product]="product" (deleteitem)="deleteEvent($event)"></app-product>
         </div>

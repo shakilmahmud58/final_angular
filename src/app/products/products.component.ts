@@ -25,6 +25,7 @@ export class ProductsComponent implements OnInit{
 
   products:any;
   showProducts:any;
+  productNumber:boolean=false;
   length:number=0;
   pageSize:number=10;
   loadItem:boolean=true;
@@ -79,12 +80,18 @@ export class ProductsComponent implements OnInit{
   }
   getProducts(){
      this.service.getProductList().subscribe((res:any)=>{
-       //console.log(res);
-       this.loadItem=false;
-       this.islogIn=true
-       this.products=res;
-       this.showProducts=this.products.slice(0,10);
-       this.length=res.length;
+      this.loadItem=false;
+      this.islogIn=true 
+      if(res.length==0)
+       {
+         this.productNumber=true;
+       }
+       else{
+        this.products=res;
+        this.showProducts=this.products.slice(0,10);
+        this.length=res.length;
+       }
+
      })
   }
   editItem(product:any){

@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
   orderBy = "asc";
   constructor(private service:DashboardService,private mycart: MycartService, private router:Router, private snackbar: MatSnackBar) { }
   data:any;
+  productNumber:boolean=false;
   loadItem:boolean=true;
   socket=io('https://server-58.azurewebsites.net');
   ngOnInit(): void {
@@ -31,9 +32,13 @@ export class DashboardComponent implements OnInit {
   getdata(){
      this.service.getData().subscribe((res:any)=>{
        this.loadItem=false;
-       this.data=res;
-       this.showItem=res.slice(0,10);
-       this.length = res.length;
+       if(res.length==0){this.productNumber=true}
+       else{
+        this.data=res;
+        this.showItem=res.slice(0,10);
+        this.length = res.length;
+       }
+
      })
   }
   addToCart(product:any){

@@ -29,7 +29,7 @@
     </div>
 </div>
         <!-- <mat-grid-tile  class="bg-warning"> -->
-
+<div *ngIf="productNumber" class="d-flex justify-content-center align-items-center">No Products available.</div>
     
 <mat-paginator [length]="length"
               [pageSize]="pageSize"
