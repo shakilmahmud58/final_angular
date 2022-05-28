@@ -5,7 +5,7 @@
   </mat-card-header>
   <mat-card-content class="">
 
-        <img *ngIf="product.url" src={{product.url}} alt={{product.name}} class="rounded-md cursor-pointer" (click)="showImage(product.url)">
+        <img *ngIf="product.url"  src={{product.url}} alt={{product.name}} class="rounded-md cursor-pointer" (click)="showImage(product.url)">
         <img *ngIf="!product.url" src="https://i.ibb.co/tpWnLVt/noimage.png" alt={{product.name}} class="image rounded-md">
     
         <p class="mt-2">
