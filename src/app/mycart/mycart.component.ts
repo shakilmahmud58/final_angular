@@ -47,6 +47,7 @@ export class MycartComponent implements OnInit {
        }
        else{
         this.cartProducts=res;
+        console.log(res);
        }
      })
   }
